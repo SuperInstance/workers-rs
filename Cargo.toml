@@ -14,6 +14,8 @@ exclude = [
     "examples/axum",
     "templates/*",
     "wasm-bindgen",
+    "wasm-streams",
+    "gloo",
     "generated",
 ]
 resolver = "2"
@@ -113,3 +115,4 @@ wasm-bindgen-macro-support = { version = "0.2.121", path = "./wasm-bindgen/crate
 wasm-bindgen-shared = { version = "0.2.121", path = "./wasm-bindgen/crates/shared" }
 wasm-bindgen-test = { version = "0.3.71", path = "./wasm-bindgen/crates/test" }
 web-sys = { version = "0.3.98", path = './wasm-bindgen/crates/web-sys' }
+wasm-streams = { version = "0.5.0", path = './wasm-streams' }
