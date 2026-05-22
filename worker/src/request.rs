@@ -4,7 +4,6 @@ use crate::{
     cf::Cf, error::Error, headers::Headers, http::Method, ByteStream, FormData, RequestInit, Result,
 };
 
-use js_sys::futures::JsFuture;
 use serde::de::DeserializeOwned;
 #[cfg(test)]
 use std::borrow::Cow;
@@ -12,6 +11,7 @@ use std::borrow::Cow;
 use url::form_urlencoded::Parse;
 use url::Url;
 use wasm_bindgen::JsCast;
+use wasm_bindgen_futures::JsFuture;
 use worker_sys::ext::RequestExt;
 
 /// A [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) representation for

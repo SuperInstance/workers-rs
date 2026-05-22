@@ -8,6 +8,7 @@ use std::time::Duration;
 
 use futures_util::StreamExt;
 use wasm_bindgen::{throw_str, UnwrapThrowExt};
+use wasm_bindgen_futures::spawn_local;
 use worker::*;
 
 use crate::SomeSharedData;
@@ -28,7 +29,7 @@ impl DurableObject for EchoContainer {
         }
         let ready = Arc::new(AtomicBool::new(false));
         let ready_clone = Arc::clone(&ready);
-        js_sys::futures::spawn_local(async move {
+        spawn_local(async move {
             for _ in 0..10 {
                 match container
                     .get_tcp_port(8080)
@@ -111,7 +112,7 @@ pub async fn handle_container(
                 None => return Response::error("Expected websocket response", 500),
             };
             ws.accept()?;
-            js_sys::futures::spawn_local(redir_websocket(ws, server));
+            spawn_local(redir_websocket(ws, server));
             Response::from_websocket(client)
         }
         _ => Response::error("Container method not allowed", 405),

@@ -2,9 +2,9 @@ use std::cell::Cell;
 use std::panic::AssertUnwindSafe;
 use tokio_stream::{StreamExt, StreamMap};
 use worker::{
-    durable_object, wasm_bindgen, DurableObject, Env, Error, Method, Request, Response,
-    ResponseBuilder, Result, State, WebSocket, WebSocketIncomingMessage, WebSocketPair,
-    WebsocketEvent, js_sys
+    durable_object, wasm_bindgen, wasm_bindgen_futures, DurableObject, Env, Error, Method, Request,
+    Response, ResponseBuilder, Result, State, WebSocket, WebSocketIncomingMessage, WebSocketPair,
+    WebsocketEvent,
 };
 
 use crate::SomeSharedData;
@@ -136,7 +136,7 @@ pub async fn handle_websocket(req: Request, env: Env, _data: SomeSharedData) -> 
     let do_ws = res.websocket().expect("server did not accept websocket");
     do_ws.accept()?;
 
-    js_sys::futures::spawn_local(async move {
+    wasm_bindgen_futures::spawn_local(async move {
         let event_stream = server.events().expect("could not open stream");
         let do_event_stream = do_ws.events().expect("could not open stream");
 
