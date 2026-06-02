@@ -1,0 +1,13 @@
+[package]
+name = "guardian"
+version = "0.1.0"
+edition = "2021"
+description = "Edge Conservation Guardian — track serverless resource usage and enforce cold-start budgets"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+
+[workspace]
+members = ["."]
+
+[dev-dependencies]
